@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Punto Buply · Registro</title>
+  <title>Punto Buply · Bariloche</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -30,6 +30,35 @@
     }
     input:focus { border-color: #57aba9; background: #fff; }
     input.error { border-color: #e05a3a; }
+
+    /* DATOS GUARDADOS BANNER */
+    .datos-guardados {
+      background: #e5f4f3;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .datos-guardados-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .datos-guardados p { font-size: 13px; font-weight: 700; color: #57aba9; margin: 0; line-height: 1.4; }
+    .datos-guardados span { font-weight: 900; }
+
+    /* SELECTOR UBICACION */
+    .ubicacion-select {
+      width: 100%; padding: 14px 44px 14px 16px; border-radius: 14px;
+      border: 1.5px solid #e0e0e0; font-family: 'Nunito', sans-serif;
+      font-size: 16px; font-weight: 600; color: #333; background: #f9f9f9;
+      outline: none; transition: border-color 0.2s; margin-bottom: 1rem;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2357aba9' stroke-width='2.5' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+    }
+    .ubicacion-select:focus { border-color: #57aba9; background-color: #fff; }
+    .ubicacion-select.error { border-color: #e05a3a; }
+
+    /* PESO */
     .peso-wrap { position: relative; margin-bottom: 0.5rem; }
     .peso-wrap input[type="number"] {
       font-size: 2.6rem; font-weight: 900; text-align: center;
@@ -45,6 +74,8 @@
     .kg-presets { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 1rem; }
     .kg-btn { background: #e5f4f3; border: 2px solid #b8dedd; border-radius: 99px; padding: 7px 16px; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; color: #57aba9; cursor: pointer; -webkit-tap-highlight-color: transparent; }
     .kg-btn:active { background: #f8ecb6; }
+
+    /* CAMARA */
     .camera-zone { width: 100%; padding: 24px 16px; border-radius: 20px; border: 2.5px dashed #57aba9; background: #e5f4f3; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; position: relative; transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
     .camera-zone.has-photo { border-style: solid; }
     .camera-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; font-size: 0; }
@@ -56,16 +87,22 @@
     .photo-ok { display: none; align-items: center; gap: 8px; background: #e5f4f3; border-radius: 12px; padding: 10px 14px; margin-top: 10px; }
     .photo-ok svg { width: 20px; height: 20px; stroke: #57aba9; fill: none; stroke-width: 2.5; stroke-linecap: round; flex-shrink: 0; }
     .photo-ok span { font-size: 14px; font-weight: 800; color: #57aba9; }
+
+    /* BOTONES */
     .btn { width: 100%; padding: 16px; border-radius: 16px; border: none; font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 1.25rem; transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
     .btn-main { background: #57aba9; color: #fff; }
     .btn-main:disabled { opacity: 0.35; cursor: not-allowed; }
     .btn-back { background: transparent; border: 2px solid #57aba9; color: #57aba9; margin-top: 8px; }
     .btn:active { transform: scale(0.97); }
+
+    /* LOADING */
     #loadingScreen { display: none; text-align: center; padding: 2.5rem 1rem; }
     .spinner { width: 56px; height: 56px; border: 5px solid #e5f4f3; border-top-color: #57aba9; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1.25rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading-text { font-size: 16px; font-weight: 700; color: #57aba9; }
     .loading-sub { font-size: 13px; color: #888; margin-top: 6px; font-weight: 600; }
+
+    /* EXITO */
     #successScreen { display: none; text-align: center; padding: 2rem 1rem; }
     .success-circle { width: 80px; height: 80px; background: #57aba9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
     .success-circle svg { width: 42px; height: 42px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; }
@@ -80,23 +117,29 @@
 
   <div class="header">
     <div class="logo">Buply</div>
-    <div class="header-sub">Punto Buply · Registro con balanza</div>
+    <div class="header-sub">Punto Buply · Bariloche</div>
   </div>
 
+  <!-- 6 dots: 0=nombre, 1=dni, 2=ubicacion, 3=peso, 4=foto, 5=mail -->
   <div class="step-indicator" id="dots">
     <div class="dot active" id="d0"></div>
     <div class="dot" id="d1"></div>
     <div class="dot" id="d2"></div>
     <div class="dot" id="d3"></div>
     <div class="dot" id="d4"></div>
+    <div class="dot" id="d5"></div>
   </div>
 
   <div class="card" id="mainCard">
 
     <!-- PASO 0: NOMBRE -->
     <div class="step visible" id="s0">
-      <div class="step-title">Hola, bienvenido</div>
+      <div class="step-title" id="titleNombre">Hola, bienvenido</div>
       <div class="step-desc">¿Cuál es tu nombre?</div>
+      <div class="datos-guardados" id="bannerNombre" style="display:none">
+        <div class="datos-guardados-icon">👋</div>
+        <p>Tus datos están guardados. Podés editarlos si querés.</p>
+      </div>
       <label class="field-label">Nombre</label>
       <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="given-name">
       <label class="field-label">Apellido</label>
@@ -114,9 +157,23 @@
       <button class="btn btn-back" onclick="ir(0)">← Volver</button>
     </div>
 
-    <!-- PASO 2: PESO -->
+    <!-- PASO 2: UBICACION -->
     <div class="step" id="s2">
-      <div class="step-title" id="titlePeso">¿Cuánto pesa? ⚖️</div>
+      <div class="step-title">¿Dónde estás?</div>
+      <div class="step-desc">¿En qué Mini Estación te encontrás?</div>
+      <select class="ubicacion-select" id="ubicacion">
+        <option value="">Seleccioná una opción...</option>
+        <option>Hotel Ecomax</option>
+        <option>Mercado del Molino</option>
+        <option>Municipalidad de Bariloche - Cerro Catedral</option>
+      </select>
+      <button class="btn btn-main" onclick="ir(3)">Continuar →</button>
+      <button class="btn btn-back" onclick="ir(1)">← Volver</button>
+    </div>
+
+    <!-- PASO 3: PESO -->
+    <div class="step" id="s3">
+      <div class="step-title">¿Cuánto pesa? ⚖️</div>
       <div class="step-desc">Anotá el peso que indica la balanza</div>
       <div class="peso-wrap">
         <input type="number" id="peso" placeholder="0.0" min="0.1" max="9999" step="0.1" inputmode="decimal" autocomplete="off">
@@ -131,12 +188,12 @@
         <button class="kg-btn" onclick="setPeso(10)">10 kg</button>
         <button class="kg-btn" onclick="setPeso(0)">Limpiar</button>
       </div>
-      <button class="btn btn-main" onclick="ir(3)">Continuar →</button>
-      <button class="btn btn-back" id="btnVolverPeso" onclick="ir(1)">← Volver</button>
+      <button class="btn btn-main" onclick="ir(4)">Continuar →</button>
+      <button class="btn btn-back" onclick="ir(2)">← Volver</button>
     </div>
 
-    <!-- PASO 3: FOTO -->
-    <div class="step" id="s3">
+    <!-- PASO 4: FOTO -->
+    <div class="step" id="s4">
       <div class="step-title" id="step-title-foto">Sacá una foto</div>
       <div class="step-desc" id="step-desc-foto">Mostrá lo que trajiste al punto Buply</div>
       <label class="camera-zone" id="cameraZone">
@@ -152,18 +209,18 @@
         <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <span>¡Foto lista!</span>
       </div>
-      <button class="btn btn-main" id="btnFoto" onclick="usuarioGuardado ? enviar() : ir(4)" disabled>Continuar →</button>
-      <button class="btn btn-back" id="btnVolver3" onclick="ir(2)">← Volver</button>
+      <button class="btn btn-main" id="btnFoto" onclick="usuarioGuardado ? enviar() : ir(5)" disabled>Continuar →</button>
+      <button class="btn btn-back" onclick="ir(3)">← Volver</button>
     </div>
 
-    <!-- PASO 4: MAIL -->
-    <div class="step" id="s4">
+    <!-- PASO 5: MAIL (solo usuarios nuevos) -->
+    <div class="step" id="s5">
       <div class="step-title">Tu mail</div>
       <div class="step-desc">Te enviamos la confirmación ahí</div>
       <label class="field-label">Correo electrónico</label>
       <input type="email" id="mail" placeholder="ejemplo@mail.com" inputmode="email" autocomplete="email">
       <button class="btn btn-main" onclick="enviar()">Enviar registro ✓</button>
-      <button class="btn btn-back" onclick="ir(3)">← Volver</button>
+      <button class="btn btn-back" onclick="ir(4)">← Volver</button>
     </div>
 
     <!-- LOADING -->
@@ -173,7 +230,7 @@
       <div class="loading-sub">Esto tarda solo unos segundos</div>
     </div>
 
-    <!-- ÉXITO -->
+    <!-- EXITO -->
     <div id="successScreen">
       <div class="success-circle">
         <svg viewBox="0 0 24 24"><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -197,7 +254,7 @@
 </div>
 
 <script>
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAuuXXhdF3OcS6ZQXwseyIT2bycneJz-QIseb2WGzhhkxiGCPzIwwbfJOxMt7wDX6F/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxgl53L7fIzjW53xBS0AZZfBftk7mrxRWKaLazIVwy1YvWtaQ2Hx5yeTPek6RJkb2lI/exec';
   var paso = 0;
   var fotoBase64 = null;
   var usuarioGuardado = null;
@@ -206,38 +263,56 @@
     var saved = localStorage.getItem('buply_usuario');
     if (saved) {
       usuarioGuardado = JSON.parse(saved);
-      ['d0','d1'].forEach(function(id) {
-        document.getElementById(id).classList.remove('active');
-        document.getElementById(id).classList.add('done');
-      });
-      document.getElementById('d2').classList.add('active');
-      document.getElementById('titlePeso').textContent = 'Hola de nuevo, ' + usuarioGuardado.nombre + ' ⚖️';
+
+      // Pre-llenar campos con datos guardados
+      document.getElementById('nombre').value  = usuarioGuardado.nombre  || '';
+      document.getElementById('apellido').value = usuarioGuardado.apellido || '';
+      document.getElementById('dni').value     = usuarioGuardado.dni     || '';
+
+      // Mostrar banner y saludo
+      document.getElementById('bannerNombre').style.display = 'flex';
+      document.getElementById('titleNombre').textContent = '¡Hola de nuevo, ' + usuarioGuardado.nombre + '!';
       document.getElementById('step-title-foto').textContent = '¡Hola de nuevo, ' + usuarioGuardado.nombre + '!';
       document.getElementById('step-desc-foto').textContent  = 'Sacá una foto de lo que trajiste hoy';
-      document.getElementById('btnVolverPeso').style.display = 'none';
-      document.getElementById('btnVolver3').style.display = 'none';
-      document.getElementById('s0').classList.remove('visible');
-      document.getElementById('s2').classList.add('visible');
-      paso = 2;
+
+      // Todos los pasos disponibles con volver — no ocultamos nada
+      // El usuario recurrente arranca desde paso 0 con datos pre-cargados
+      // pero puede editar y navegar libremente
     }
   };
 
   function ir(n) {
-    if (n === 1) {
-      if (!document.getElementById('nombre').value.trim())   { marcarError('nombre');   return; }
-      if (!document.getElementById('apellido').value.trim()) { marcarError('apellido'); return; }
+    // Validaciones solo al avanzar
+    if (n > paso) {
+      if (paso === 0) {
+        if (!document.getElementById('nombre').value.trim())   { marcarError('nombre');   return; }
+        if (!document.getElementById('apellido').value.trim()) { marcarError('apellido'); return; }
+      }
+      if (paso === 1) {
+        var dni = document.getElementById('dni').value.trim();
+        if (!dni || dni.length < 7) { marcarError('dni'); return; }
+      }
+      if (paso === 2) {
+        var ub = document.getElementById('ubicacion').value;
+        if (!ub) {
+          document.getElementById('ubicacion').classList.add('error');
+          setTimeout(function(){ document.getElementById('ubicacion').classList.remove('error'); }, 2000);
+          return;
+        }
+      }
+      if (paso === 3) {
+        var p = parseFloat(document.getElementById('peso').value);
+        if (!p || p <= 0) { marcarError('peso'); return; }
+      }
     }
-    if (n === 2) {
-      var dni = document.getElementById('dni').value.trim();
-      if (!dni || dni.length < 7) { marcarError('dni'); return; }
-    }
-    if (n === 3) {
-      var p = parseFloat(document.getElementById('peso').value);
-      if (!p || p <= 0) { marcarError('peso'); return; }
-    }
+
     document.getElementById('s' + paso).classList.remove('visible');
     document.getElementById('d' + paso).classList.remove('active');
-    document.getElementById('d' + paso).classList.add('done');
+    if (n > paso) {
+      document.getElementById('d' + paso).classList.add('done');
+    } else {
+      document.getElementById('d' + paso).classList.remove('done');
+    }
     paso = n;
     document.getElementById('s' + paso).classList.add('visible');
     document.getElementById('d' + paso).classList.remove('done');
@@ -285,23 +360,45 @@
   }
 
   function enviar() {
-    var pesoVal = parseFloat(document.getElementById('peso').value);
+    var pesoVal   = parseFloat(document.getElementById('peso').value);
+    var ubicacion = document.getElementById('ubicacion').value;
+    var nombre    = document.getElementById('nombre').value.trim();
+    var apellido  = document.getElementById('apellido').value.trim();
+    var dni       = document.getElementById('dni').value.trim();
     var payload;
+
     if (usuarioGuardado) {
-      payload = { nombre: usuarioGuardado.nombre, apellido: usuarioGuardado.apellido, dni: usuarioGuardado.dni, mail: usuarioGuardado.mail, peso: pesoVal, foto: fotoBase64, nombreFoto: 'foto.jpg' };
-      document.getElementById('s3').classList.remove('visible');
+      // Tomar los datos del formulario (puede haberlos editado)
+      payload = {
+        nombre: nombre, apellido: apellido, dni: dni,
+        mail: usuarioGuardado.mail,
+        ubicacion: ubicacion, peso: pesoVal,
+        foto: fotoBase64, nombreFoto: 'foto.jpg'
+      };
+      // Actualizar localStorage con posibles cambios
+      localStorage.setItem('buply_usuario', JSON.stringify({ nombre: nombre, apellido: apellido, dni: dni, mail: usuarioGuardado.mail }));
+      document.getElementById('s4').classList.remove('visible');
     } else {
       var mail = document.getElementById('mail').value.trim();
       if (!mail || !mail.includes('@')) { marcarError('mail'); return; }
-      payload = { nombre: document.getElementById('nombre').value.trim(), apellido: document.getElementById('apellido').value.trim(), dni: document.getElementById('dni').value.trim(), mail: mail, peso: pesoVal, foto: fotoBase64, nombreFoto: 'foto.jpg' };
-      localStorage.setItem('buply_usuario', JSON.stringify({ nombre: payload.nombre, apellido: payload.apellido, dni: payload.dni, mail: payload.mail }));
-      document.getElementById('s4').classList.remove('visible');
+      payload = {
+        nombre: nombre, apellido: apellido, dni: dni, mail: mail,
+        ubicacion: ubicacion, peso: pesoVal,
+        foto: fotoBase64, nombreFoto: 'foto.jpg'
+      };
+      localStorage.setItem('buply_usuario', JSON.stringify({ nombre: nombre, apellido: apellido, dni: dni, mail: mail }));
+      document.getElementById('s5').classList.remove('visible');
     }
+
     document.getElementById('dots').style.display = 'none';
     document.getElementById('loadingScreen').style.display = 'block';
-    fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors', headers: { 'Content-Type': 'application/json' } })
-      .then(function() { mostrarExito(pesoVal); })
-      .catch(function() { mostrarExito(pesoVal); });
+
+    fetch(SCRIPT_URL, {
+      method: 'POST', body: JSON.stringify(payload),
+      mode: 'no-cors', headers: { 'Content-Type': 'application/json' }
+    })
+    .then(function() { mostrarExito(pesoVal); })
+    .catch(function() { mostrarExito(pesoVal); });
   }
 
   function mostrarExito(pesoVal) {
